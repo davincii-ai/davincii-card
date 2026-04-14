@@ -303,7 +303,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Rajdhan
         <div id="qrcode"></div>
       </div>
       <div class="save-hint">vCard · Tap or Scan</div>
-      <a href="Anand_Sompura_DaVincii.vcf" download class="save-btn">
+      <a href="https://davincii-ai.github.io/davincii-card/Anand_Sompura_DaVincii.vcf" class="save-btn">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Save Contact
       </a>
@@ -319,7 +319,7 @@ const vcard = [
 ].join('\n');
 
 // QR points to hosted vcf (includes photo) with fallback to inline vcard
-const vcfUrl = 'https://github.com/davincii-ai/davincii-card/blob/d8430b7936ba964301283684037e328e30f616db/Anand_Sompura_DaVincii.vcf';
+const vcfUrl = 'https://davincii-ai.github.io/davincii-card/Anand_Sompura_DaVincii.vcf';
 
 new QRCode(document.getElementById('qrcode'), {
   text: vcfUrl, width: 150, height: 150,
