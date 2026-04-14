@@ -13,16 +13,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box} html,body{height:100%;overflow:hidden;background:#000}
-body{display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;background:radial-gradient(circle at 50% 18%, rgba(0,229,255,.10), transparent 28%),radial-gradient(circle at 50% 55%, #07111a 0%, #02060a 46%, #000 100%)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%;background:#000;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:18px}
+body{display:flex;align-items:flex-start;justify-content:center;font-family:'Rajdhani',sans-serif;background:radial-gradient(circle at 50% 18%, rgba(0,229,255,.10), transparent 28%),radial-gradient(circle at 50% 55%, #07111a 0%, #02060a 46%, #000 100%);padding:max(18px, env(safe-area-inset-top)) 0 max(22px, env(safe-area-inset-bottom));}
 body::before,body::after{content:'';position:fixed;inset:-10%;pointer-events:none;z-index:0;background-repeat:no-repeat;mix-blend-mode:screen}
 body::before{opacity:.22;background-image:radial-gradient(circle at 18% 26%, rgba(220,255,255,.8) 0 1px, transparent 2px),radial-gradient(circle at 74% 19%, rgba(220,255,255,.7) 0 1px, transparent 2px),radial-gradient(circle at 84% 68%, rgba(220,255,255,.4) 0 1px, transparent 2px),radial-gradient(circle at 24% 78%, rgba(220,255,255,.35) 0 1px, transparent 2px),radial-gradient(circle at 58% 62%, rgba(220,255,255,.3) 0 1px, transparent 2px),radial-gradient(circle at 42% 40%, rgba(220,255,255,.25) 0 1px, transparent 2px);animation:drift 18s linear infinite}
 body::after{opacity:.22;filter:blur(12px);background-image:radial-gradient(circle at 30% 18%, rgba(0,229,255,.45) 0 2px, transparent 5px),radial-gradient(circle at 70% 78%, rgba(0,229,255,.28) 0 2px, transparent 6px),radial-gradient(circle at 84% 34%, rgba(0,229,255,.2) 0 2px, transparent 7px),radial-gradient(circle at 14% 60%, rgba(0,229,255,.18) 0 2px, transparent 7px);animation:driftReverse 24s linear infinite}
 @keyframes drift{to{transform:translate3d(-2%,1.5%,0)}} @keyframes driftReverse{to{transform:translate3d(2%,-1.5%,0)}}
 #particleCanvas{position:fixed;inset:0;z-index:0;opacity:.8;mix-blend-mode:screen}
 .cursor-glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:1;opacity:0;background:radial-gradient(circle, rgba(0,229,255,.26) 0%, rgba(0,229,255,.12) 24%, rgba(0,229,255,.04) 46%, rgba(0,229,255,0) 72%);filter:blur(14px);transform:translate(-50%,-50%);transition:opacity .25s ease;mix-blend-mode:screen}
-.card-wrap{position:relative;z-index:2;perspective:1600px}
-.card{position:relative;width:420px;max-width:92vw;background:linear-gradient(160deg,#05080d 0%,#0b1118 42%,#04070b 100%);border:1px solid rgba(0,229,255,.14);border-radius:22px;padding:34px 28px 30px;box-shadow:0 0 90px rgba(0,229,255,.08), inset 0 1px 0 rgba(255,255,255,.05);transform:rotateX(0) rotateY(0);transition:transform .18s ease-out, box-shadow .18s ease-out, border-color .18s ease-out;overflow:hidden;isolation:isolate;backdrop-filter:blur(6px);transform-style:preserve-3d}
+.card-wrap{position:relative;z-index:2;perspective:1600px;width:100%;display:flex;justify-content:center;align-items:flex-start;padding:0 12px;}
+.card{position:relative;width:min(420px,92vw);max-width:420px;background:linear-gradient(160deg,#05080d 0%,#0b1118 42%,#04070b 100%);border:1px solid rgba(0,229,255,.14);border-radius:22px;padding:34px 28px 30px;box-shadow:0 0 90px rgba(0,229,255,.08), inset 0 1px 0 rgba(255,255,255,.05);transform:rotateX(0) rotateY(0);transition:transform .18s ease-out, box-shadow .18s ease-out, border-color .18s ease-out;overflow:hidden;isolation:isolate;backdrop-filter:blur(6px);transform-style:preserve-3d;margin:0 auto;}
 .card::before{content:'';position:absolute;inset:-1px;border-radius:22px;padding:1px;background:conic-gradient(from 180deg, transparent, rgba(0,229,255,.17), transparent, rgba(0,229,255,.05), transparent);opacity:.48;animation:borderSpin 12s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
 .card::after{content:'';position:absolute;left:-15%;right:-15%;top:-12%;height:110px;background:radial-gradient(circle at 50% 50%, rgba(0,229,255,.14), transparent 62%);filter:blur(28px);pointer-events:none}
 @keyframes borderSpin{to{transform:rotate(360deg)}}
@@ -63,7 +65,38 @@ body::after{opacity:.22;filter:blur(12px);background-image:radial-gradient(circl
 .save-hint{margin-top:14px;font-size:10px;letter-spacing:2px;color:rgba(0,229,255,.25);text-transform:uppercase}
 .save-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 24px;border-radius:10px;border:1px solid rgba(0,229,255,.2);background:rgba(0,229,255,.06);color:#b2ebf2;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s ease;cursor:pointer}
 .save-btn:hover{background:rgba(0,229,255,.12);border-color:rgba(0,229,255,.35);box-shadow:0 0 20px rgba(0,229,255,.08)} .save-btn svg{width:14px;height:14px;stroke:#00e5ff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:480px){.card{padding:30px 22px 24px}.logo-text{font-size:22px;letter-spacing:6px}.logo-sub{font-size:9px;letter-spacing:4px}.avatar{width:240px;height:240px}.name{font-size:17px;letter-spacing:2px}}
+@media(max-width:680px){
+body{display:block;overflow-y:auto;padding:max(12px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom));}
+.card-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0 10px;}
+.card{width:min(394px,94vw);max-width:394px;padding:24px 18px 22px;border-radius:18px;}
+.card::after{top:-10%;height:88px}
+.logo-section{margin-bottom:6px}
+.logo-text{font-size:22px;letter-spacing:6px}
+.logo-sub{font-size:9px;letter-spacing:4px}
+.avatar-wrap{margin:0 0 8px}
+.avatar{width:210px;height:210px}
+.divider{margin:0 auto 14px;width:58%}
+.name{font-size:17px;letter-spacing:2px}
+.title{font-size:11px;letter-spacing:3px;margin-bottom:18px}
+.contact-grid{gap:8px;margin-bottom:18px}
+.contact-row{padding:9px 12px;gap:10px}
+.contact-icon{width:30px;height:30px}
+.contact-icon svg{width:14px;height:14px}
+.contact-label{font-size:8px;letter-spacing:1.6px}
+.contact-value{font-size:12px}
+.qr-section{margin-top:2px}
+.qr-label{font-size:8px;letter-spacing:3px;margin-bottom:10px}
+.qr-frame{padding:10px}
+.save-hint{margin-top:10px;font-size:9px;letter-spacing:1.7px}
+.save-btn{margin-top:14px;padding:9px 18px;font-size:12px;letter-spacing:1.6px}
+}
+@media(max-width:420px){
+.card{width:min(372px,95vw);padding:22px 16px 20px}
+.logo-text{font-size:20px;letter-spacing:5px}
+.avatar{width:194px;height:194px}
+.name{font-size:15px}
+.title{font-size:10px}
+}
 </style>
 </head>
 <body>
