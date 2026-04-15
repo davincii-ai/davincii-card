@@ -1,4 +1,4 @@
-const CACHE_NAME = 'davincii-card-v9';
+const CACHE_NAME = 'davincii-card-v10';
 const ASSETS = [
   '/davincii-card/',
   '/davincii-card/index.html',
