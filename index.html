@@ -135,12 +135,12 @@ body{display:block;overflow-y:auto;padding:max(12px, env(safe-area-inset-top)) 0
       <div class="qr-label">Scan to Save Contact</div>
       <div class="qr-frame"><div class="qr-corner tl"></div><div class="qr-corner tr"></div><div class="qr-corner bl"></div><div class="qr-corner br"></div><div id="qrcode"></div></div>
       <div class="save-hint">vCard · Tap or Scan</div>
-      <a href="https://davincii-ai.github.io/davincii-card/Anand_Sompura_DaVincii_FINAL.vcf" class="save-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save Contact</a>
+      <a href="https://davincii-ai.github.io/davincii-card/Anand_Sompura_DaVincii.vcf" class="save-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save Contact</a>
     </div>
   </div>
 </div>
 <script>
-const vcfUrl='https://davincii-ai.github.io/davincii-card/Anand_Sompura_DaVincii_FINAL.vcf';
+const vcfUrl='https://davincii-ai.github.io/davincii-card/Anand_Sompura_DaVincii.vcf';
 new QRCode(document.getElementById('qrcode'),{text:vcfUrl,width:150,height:150,colorDark:'#00e5ff',colorLight:'#0a0a0f',correctLevel:QRCode.CorrectLevel.M});
 const card=document.getElementById('bizCard'),wrap=document.querySelector('.card-wrap'),logo=document.getElementById('logoWrap'),glow=document.getElementById('cursorGlow'),cv=document.getElementById('particleCanvas'),ctx=cv.getContext('2d');
 let particles=[],pointerX=window.innerWidth/2,pointerY=window.innerHeight/2;
